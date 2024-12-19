@@ -6,12 +6,12 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import NoSuchElementException
 
 
-class TestAddCase(unittest.TestCase):
+class TestAddGroup(unittest.TestCase):
     def setUp(self):
         self.wd=webdriver.Chrome(executable_path=r'C:\Windows\SysWOW64\chromedriver.exe')
         self.wd.implicitly_wait(30)
     
-    def test_add_case(self):
+    def test_add_group(self):
         wd = self.wd
         wd.get("http://localhost/addressbook/")
         wd.find_element_by_name("user").click()
