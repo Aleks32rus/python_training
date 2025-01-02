@@ -2,7 +2,7 @@ from model.contact import Contact
 
 
 def test_add_contact(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.add_new_contact()
     app.fill_contact_fields(Contact(firstname="John",
                                      middlename="A.",
@@ -22,11 +22,11 @@ def test_add_contact(app):
                                      aday="12",
                                      amonth="October",
                                      ayear="1985"))
-    app.logout()
+    app.session.logout()
 
 
 def test_add_empty_contact(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.fill_contact_fields(Contact(firstname="",
                                      middlename="",
                                      lastname="",
@@ -45,4 +45,4 @@ def test_add_empty_contact(app):
                                      aday="",
                                      amonth="-",
                                      ayear=""))
-    app.logout()
+    app.session.logout()
