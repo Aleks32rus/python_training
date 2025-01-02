@@ -3,8 +3,7 @@ from model.contact import Contact
 
 def test_add_contact(app):
     app.session.login(username="admin", password="secret")
-    app.add_new_contact()
-    app.fill_contact_fields(Contact(firstname="John",
+    app.contact.fill_fields(Contact(firstname="John",
                                      middlename="A.",
                                      lastname="Doe",
                                      nickname="JD",
@@ -27,7 +26,7 @@ def test_add_contact(app):
 
 def test_add_empty_contact(app):
     app.session.login(username="admin", password="secret")
-    app.fill_contact_fields(Contact(firstname="",
+    app.contact.fill_fields(Contact(firstname="",
                                      middlename="",
                                      lastname="",
                                      nickname="",
