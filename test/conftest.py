@@ -1,9 +1,12 @@
 import pytest
 from fixture.application import Application
 
+fixture = None
+
 
 @pytest.fixture(scope='session')
 def app(request):
+    global fixture
     fixture = Application()
     fixture.session.login(username="admin", password="secret")
     if not fixture.is_valid():
@@ -14,9 +17,10 @@ def app(request):
 
 
 @pytest.fixture(scope='session', autouse=True)
-def stop(request, app):
+def stop(request):
     def fin():
-        app.session.logout()
-        app.destroy()
+        fixture.session.logout()
+        fixture.destroy()
 
     request.addfinalizer(fin)
+    return fixture
