@@ -22,3 +22,13 @@ def test_edit_contact(app):
                                      amonth="October",
                                      ayear="1985"))
     app.session.logout()
+
+def test_edit_contact_firstname(app):
+    app.session.login(username="admin", password="secret")
+    app.contact.edit_first_contact(Contact(firstname="Elvin"))
+    app.session.logout()
+
+def test_edit_contact_middlename(app):
+    app.session.login(username="admin", password="secret")
+    app.contact.edit_first_contact(Contact(middlename="B."))
+    app.session.logout()
