@@ -1,5 +1,7 @@
 from selenium.webdriver.support.select import Select
 
+from model.contact import Contact
+
 
 class ContactHelper:
 
@@ -21,7 +23,6 @@ class ContactHelper:
         self.return_to_home_page()
 
     def fill_contact_form(self, contact):
-        wd = self.app.wd
         self.change_field_value("firstname", contact.firstname)
         self.change_field_value("middlename", contact.middlename)
         self.change_field_value("lastname", contact.lastname)
@@ -73,3 +74,14 @@ class ContactHelper:
     def count(self):
         wd = self.app.wd
         return len(wd.find_elements_by_xpath("//img[@title='Edit']"))
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        contacts = []
+        for element in wd.find_elements_by_css_selector("[name='entry']"):
+            firstname = element.find_elements_by_css_selector("td")[2].text
+            lastname = element.find_elements_by_css_selector("td")[1].text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            contacts.append(Contact(firstname=firstname, lastname=lastname, id=id))
+        return contacts
